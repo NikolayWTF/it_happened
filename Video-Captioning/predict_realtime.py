@@ -212,6 +212,9 @@ if __name__ == "__main__":
     # print('.........................\nGenerating Caption:\n')
     video_caption, file = video_to_text.test()
     # sentence = ''
+    ans_file = open("../answer.txt", "a")
+    ans_file.write(video_caption)
+    ans_file.close()
     print(video_caption)
     # print(sentence)
     # for text in video_caption.split():

@@ -219,6 +219,9 @@ def run(
     answer = ""
     for _ in ans:
       answer += _ + ", "
+    ans_file = open("../answer.txt", "w")
+    ans_file.write(answer[:-2] + "\n")
+    ans_file.close()
     print(answer[:-2])
 
 def parse_opt():
