@@ -57,14 +57,14 @@ def run(
         data=ROOT / 'data/coco128.yaml',  # dataset.yaml path
         imgsz=(640, 640),  # inference size (height, width)
         conf_thres=0.25,  # confidence threshold
-        iou_thres=0.45,  # NMS IOU threshold
+        iou_thres=0.4,  # NMS IOU threshold
         max_det=1000,  # maximum detections per image
         device='',  # cuda device, i.e. 0 or 0,1,2,3 or cpu
         view_img=False,  # show results
         save_txt=False,  # save results to *.txt
         save_conf=False,  # save confidences in --save-txt labels
         save_crop=False,  # save cropped prediction boxes
-        nosave=False,  # do not save images/videos
+        nosave=True,  # do not save images/videos
         classes=None,  # filter by class: --class 0, or --class 0 2 3
         agnostic_nms=False,  # class-agnostic NMS
         augment=False,  # augmented inference
@@ -157,8 +157,8 @@ def run(
                 # Print results
                 for c in det[:, 5].unique():
                     n = (det[:, 5] == c).sum()  # detections per class
-                    detection_item = f"{n} {names[int(c)]}{'s' * (n > 1)}"
-                    if not (detection_item in ans):
+                    detection_item = f"{n} {names[int(c)]}{'s' * (n > 1)}"[2:]
+                    if not ((detection_item[:-1] in ans) or (detection_item + "s" in ans) or (detection_item in ans)):
                         ans.append(detection_item)
 
                 # Write results
